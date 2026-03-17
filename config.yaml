@@ -1,0 +1,15 @@
+# config.yaml — наші налаштування (твій внесок)
+pipeline:
+  budget_eur: 30000000
+  test_match: "Sample_Game_1"
+
+pnl:
+  refine: true
+  alpha: 0.85
+
+vision:
+  imminent_control: true
+
+valuation:
+  max_players: 5
+  min_minutes: 900
