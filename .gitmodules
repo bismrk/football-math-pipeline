@@ -1,0 +1,18 @@
+[submodule "src/pnl"]
+	path = src/pnl
+	url = https://github.com/mguti97/PnLCalib.git
+[submodule "src/events"]
+	path = src/events
+	url = https://github.com/JohnComonitski/TrackingDataToEventData.git
+[submodule "src/vision"]
+	path = src/vision
+	url = https://github.com/USSoccerFederation/ssac26_visual_exploratory_behavior.git
+[submodule "src/rag"]
+	path = src/rag
+	url = https://github.com/ricardoherediaj/football-rag-intelligence.git
+[submodule "src/defcon"]
+	path = src/defcon
+	url = https://github.com/hyunsungkim-ds/defcon.git
+[submodule "src/triggers"]
+	path = src/triggers
+	url = https://github.com/DataKnight1/defensivetransitionstrigger.git
