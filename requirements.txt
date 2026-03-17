@@ -9,4 +9,3 @@ chromadb
 scikit-learn
 PuLP
 pyyaml
-subprocess
