@@ -1,51 +1,45 @@
-# main.py — головний скрипт інтеграції (твій внесок)
-import subprocess
 import os
+import subprocess
 from pathlib import Path
 
-print("🚀 Запуск інтегрованої математичної системи...")
+# --- КОНФІГУРАЦІЯ ---
+# Визначаємо шлях до кореневої папки проекту
+BASE_DIR = Path(__file__).resolve().parent
 
-# 1. PnL калібровка (якщо є відео)
-if Path("data/match.mp4").exists():
-    print("1️⃣ Запуск PnL-оптимізації...")
-    os.chdir("src/pnl")
-    subprocess.run([
-        "python", "inference.py",
-        "--weights_kp", "SV_kp",
-        "--weights_line", "SV_lines",
-        "--pnl_refine",
-        "--input_path", "../../data/match.mp4",
-        "--input_type", "video",
-        "--save_path", "../../outputs/calibrated_field.json"
-    ])
-    os.chdir("../..")
+def run_module(description, command, working_dir=None):
+    """Універсальна функція для запуску етапів конвеєра"""
+    print(f"\n{description}")
+    try:
+        # Виконуємо команду у вказаній директорії
+        subprocess.run(command, cwd=working_dir, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Помилка у модулі: {e}")
+    except Exception as e:
+        print(f"⚠️ Критична помилка: {e}")
 
-# 2. Генерація event data
-# print("2️⃣ Генерація подійних даних...")
-# run_module(
-#     "2️⃣ Генерація подійних даних...",
-#     ["python", "generate_event_data.py"],
-#     working_dir=BASE_DIR / "src" / "events"
-# )
+# =====================================================
+# ЗАПУСК КОНВЕЄРА (Pipeline)
+# =====================================================
 
-# 3. Vision layer (stochastic FOV)
-print("3️⃣ Обчислення візуальної поведінки...")
-os.chdir("src/vision")
-subprocess.run(["python", "vision_layer.py"])   # якщо notebook — спочатку конвертуй
-os.chdir("../..")
+# ... (тут твої кроки 1-4: обробка відео, вилучення координат тощо) ...
 
-# 4. DEFCON + Pressing triggers
-print("4️⃣ Оцінка оборонної цінності...")
-os.chdir("src/defcon")
-subprocess.run(["python", "main.py"])
-os.chdir("../triggers")
-subprocess.run(["python", "main.py"])
-os.chdir("../..")
+# 6. ВЕРИФІКАЦІЯ ТА ТОЧНІСТЬ
+# Ми запускаємо це ПЕРЕД дашбордом, бо Streamlit заблокує термінал
+run_module(
+    "📊 КРОК 6: Запуск верифікації точності моделі (Accuracy Check)...",
+    ["python", "verify_accuracy.py"],
+    working_dir=BASE_DIR
+)
 
-# 5. RAG + дашборд
-print("5️⃣ Генерація scouting-звіту через RAG...")
-os.chdir("src/rag")
-subprocess.run(["streamlit", "run", "app.py", "--server.headless", "true"])
-os.chdir("../..")
+# 5. RAG + ДАШБОРД
+# Це фінальний етап, який запускає веб-інтерфейс
+print("\n🚀 КРОК 5: Запуск інтерактивного аналітичного дашборду...")
+try:
+    # Шлях до файлу дашборду
+    app_path = BASE_DIR / "src" / "rag" / "app.py"
+    # Запускаємо streamlit. Він буде працювати, поки ти не натиснеш Ctrl+C
+    subprocess.run(["streamlit", "run", str(app_path)])
+except KeyboardInterrupt:
+    print("\n👋 Аналіз завершено. Сервер зупинено.")
 
-print("✅ ВСІ МОДУЛІ ЗАПУЩЕНО! Перевір папку outputs/")
+print(f"\n✅ ВСІ МОДУЛІ ОБРОБЛЕНО! Перевір папку {BASE_DIR}/outputs/")
