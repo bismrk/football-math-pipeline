@@ -21,10 +21,12 @@ if Path("data/match.mp4").exists():
     os.chdir("../..")
 
 # 2. Генерація event data
-print("2️⃣ Генерація подійних даних...")
-os.chdir("src/events")
-subprocess.run(["python", "generate_event_data.py"])
-os.chdir("../..")
+# print("2️⃣ Генерація подійних даних...")
+# run_module(
+#     "2️⃣ Генерація подійних даних...",
+#     ["python", "generate_event_data.py"],
+#     working_dir=BASE_DIR / "src" / "events"
+# )
 
 # 3. Vision layer (stochastic FOV)
 print("3️⃣ Обчислення візуальної поведінки...")
