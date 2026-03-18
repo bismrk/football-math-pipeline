@@ -10,4 +10,7 @@ scikit-learn
 PuLP
 pyyaml
 statsmodels
+<<<<<<< HEAD
 rdp
+=======
+>>>>>>> c0ff9919b458c4c4459ec949bca47ebb072f25fa
