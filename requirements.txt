@@ -9,3 +9,4 @@ chromadb
 scikit-learn
 PuLP
 pyyaml
+statsmodels
