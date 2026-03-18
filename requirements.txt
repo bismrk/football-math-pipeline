@@ -1,12 +1,6 @@
-torch
-torch-geometric
 pandas
 numpy
-opencv-python
-streamlit
-langchain
-chromadb
-scikit-learn
-PuLP
-pyyaml
 statsmodels
+rdp
+shapely
+scipy
