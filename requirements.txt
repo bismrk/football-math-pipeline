@@ -1,16 +1,6 @@
-torch
-torch-geometric
 pandas
 numpy
-opencv-python
-streamlit
-langchain
-chromadb
-scikit-learn
-PuLP
-pyyaml
+scipy
 statsmodels
-<<<<<<< HEAD
 rdp
-=======
->>>>>>> c0ff9919b458c4c4459ec949bca47ebb072f25fa
+shapely
